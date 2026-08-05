@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Wedding Invitation</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+background:#eef8f4;
+color:#444;
+overflow-x:hidden;
+
+}
+
+body::-webkit-scrollbar{
+width:8px;
+}
+
+body::-webkit-scrollbar-thumb{
+background:#0f766e;
+border-radius:20px;
+}
+
+.hero{
+
+position:relative;
+width:100%;
+min-height:100dvh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+overflow:hidden;
+padding:30px;
+
+}
+
+.hero::before{
+
+content:"";
+position:absolute;
+inset:0;
+
+background:
+
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.55)),
+url("cover.jpg") center center/cover;
+
+animation:zoomHero 20s ease-in-out infinite alternate;
+
+z-index:-2;
+
+}
+
+.hero::after{
+
+content:"";
+position:absolute;
+inset:0;
+backdrop-filter:blur(1px);
+background:rgba(0,0,0,.08);
+z-index:-1;
+
+}
+
+@keyframes zoomHero{
+
+0%{
+
+transform:scale(1);
+
+}
+
+100%{
+
+transform:scale(1.15);
+
+}
+
+}
+
+.cover{
+
+max-width:700px;
+padding:45px;
+border-radius:25px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.25);
+
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+animation:fadeUp 1.2s;
+
+}
+
+.cover p{
+
+letter-spacing:3px;
+text-transform:uppercase;
+font-size:14px;
+color:#f8e8c7;
+
+}
+
+.cover h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:clamp(3rem,7vw,5.5rem);
+
+color:white;
+
+margin:20px 0;
+
+line-height:1.1;
+
+text-shadow:0 10px 25px rgba(0,0,0,.4);
+
+}
+
+.cover h3{
+
+font-weight:400;
+
+font-size:22px;
+
+margin-bottom:20px;
+
+color:#fff;
+
+}
+
+.guest{
+
+margin:35px auto;
+
+padding:20px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.15);
+
+border:1px solid rgba(255,255,255,.2);
+
+backdrop-filter:blur(8px);
+
+max-width:450px;
+
+}
+
+.guest small{
+
+display:block;
+
+color:#eee;
+
+margin-bottom:8px;
+
+}
+
+.guest h2{
+
+color:white;
+
+font-size:30px;
+
+margin:8px 0;
+
+font-family:'Cormorant Garamond',serif;
+
+}
+
+.btn{
+
+display:inline-block;
+
+margin-top:25px;
+
+padding:16px 42px;
+
+background:#0f766e;
+
+color:#fff;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+font-size:17px;
+
+transition:.35s;
+
+box-shadow:0 12px 30px rgba(15,118,110,.35);
+
+animation:pulse 2s infinite;
+
+}
+
+.btn:hover{
+
+transform:translateY(-4px);
+
+background:#14b8a6;
+
+}
+
+@keyframes pulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.05);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+
+section{
+
+padding:90px 20px;
+
+}
+
+.card{
+
+max-width:900px;
+
+margin:auto;
+
+background:#fff;
+
+padding:40px;
+
+border-radius:25px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.08);
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+.grid img{
+
+width:100%;
+
+border-radius:18px;
+
+transition:.5s;
+
+}
+
+.grid img:hover{
+
+transform:scale(1.05);
+
+}
+
+.countdown{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:15px;
+
+margin-top:35px;
+
+}
+
+.box{
+
+background:#e8f5f1;
+
+padding:25px;
+
+border-radius:20px;
+
+}
+
+.box div{
+
+font-size:40px;
+
+font-weight:bold;
+
+color:#0f766e;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(60px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.fade{
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:1s;
+
+}
+
+.fade.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+.flowers{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:999;
+
+}
+
+.flowers span{
+
+position:absolute;
+
+top:-10%;
+
+font-size:22px;
+
+animation:fall linear infinite;
+
+}
+
+@keyframes fall{
+
+0%{
+
+transform:translateY(-100px) rotate(0deg);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(120vh) rotate(360deg);
+
+opacity:.2;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.cover{
+
+padding:30px 20px;
+
+}
+
+.cover h1{
+
+font-size:48px;
+
+}
+
+.cover h3{
+
+font-size:18px;
+
+}
+
+.guest{
+
+width:100%;
+
+}
+
+.btn{
+
+width:90%;
+
+max-width:320px;
+
+}
+
+.countdown{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.card{
+
+padding:25px;
+
+}
+
+}
+
+@media(min-width:1400px){
+
+.cover{
+
+max-width:850px;
+
+}
+
+.cover h1{
+
+font-size:90px;
+
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="flowers"></div>
+
+<section class="hero">
+
+<div class="cover">
+
+<p>THE WEDDING OF</p>
+
+<h1>
+May
+<br>
+&
+<br>
+Habi
+</h1>
+
+<h3>27 September 2026</h3>
+
+<div class="guest">
+
+<small>Kepada Yth.</small>
+
+<h2 id="namaTamu">
+Tamu Undangan
+</h2>
+
+<small>
+Mohon maaf apabila ada kesalahan penulisan nama.
+</small>
+
+</div>
+
+<button class="btn" onclick="openInvite()">
+
+Buka Undangan
+
+</button>
+
+<audio id="music" loop>
+
+<source src="lagu.mp3" type="audio/mpeg">
+
+</audio>
+
+</div>
+
+</section>
+
+<div id="content" style="display:none;">
+
+<section class="fade">
+
+<div class="card">
+
+<h2>
+بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+
+</h2>
+
+<br>
+
+<p>
+
+    <h2>Assalamu'alaikum Warahmatullahi Wabarakatuh
+</h2>
+
+
+<p> Seraya menengadahkan jemari bermunajat dalam hamparan Allah SWT yang terbentang menyebut nama Allah yang Maha Pengasih dan Penyayang, menyatukan langkah putra-putri kami:
+</p>
+<br>
+
+
+
+</p>
+
+</div>
+
+</section>
+
+<section class="fade">
+
+<div class="card">
+
+<h2>
+
+⏳ Countdown
+
+</h2>
+
+<div class="countdown">
+
+<div class="box">
+
+<div id="d">0</div>
+
+<small>Hari</small>
+
+</div>
+
+<div class="box">
+
+<div id="h">0</div>
+
+<small>Jam</small>
+
+</div>
+
+<div class="box">
+
+<div id="m">0</div>
+
+<small>Menit</small>
+
+</div>
+
+<div class="box">
+
+<div id="s">0</div>
+
+<small>Detik</small>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="fade">
+
+<div class="card">
+
+<h2>Mempelai</h2>
+
+<div class="grid">
+
+<div>
+
+<img src="pria.jpg">
+
+<h3>Muhammad Habibullah</h3>
+
+<p>
+
+Putra Bapak M.Jahuri
+
+<br>
+
+&
+
+<br>
+
+Ibu Halimah
+
+</p>
+
+</div>
+
+<div>
+
+<img src="wanita.jpg">
+
+<h3>Siti Maisarah</h3>
+
+<p>
+
+Putri Bapak Hasan Rusdi
+
+<br>
+
+&
+
+<br>
+
+Ibu Noor Hasanah
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="fade">
+
+<div class="card">
+
+<h2>Galeri</h2>
+
+<div class="grid">
+
+<img src="foto1.jpg">
+
+<img src="foto2.jpg">
+
+<img src="foto3.jpg">
+
+<img src="foto4.jpg">
+
+</div>
+
+</div>
+
+</section>
+
+<section class="fade">
+
+<div class="card">
+
+
+<p> Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami, yang Insya Allah akan diselenggarakan pada
+<br><br>
+
+
+<p>
+Akad Nikah <br>
+ Minggu, 27 September 2026
+<br>
+
+08.00 WIta - 09.00 WIta 
+
+</p>
+
+<br>
+
+<p>
+
+Resepsi<br>
+09.00 WIta - Selesai
+</p>
+
+<br>
+
+<p>Tempat<br>
+
+Desa Tampang Rt 1 Rw 1 No 111 kec.Pelaihari Kab.Tanah Laut
+
+</p>
+
+<br>
+
+<a href="https://maps.app.goo.gl/qKqXzQXvN16WCCAw5?g_st=ic" target="_blank" class="btn">
+
+Lihat Lokasi
+
+</a>
+
+</div>
+
+</section>
+
+<section class="fade">
+
+<div class="card">
+
+<h2>Wedding Gift</h2>
+
+<br>
+
+<p>Bank Seabank</p>
+
+<h3 id="rek1">901596310405</h3>
+
+<p>
+
+a.n. Siti Maisarah
+
+</p>
+
+<br>
+
+<button class="btn" onclick="copyRek('rek1')">
+    Salin Rekening
+</button>
+
+</button>
+
+<br><br>
+<br>
+
+<p>Bank BNI</p>
+
+<h3 id="rek2">1946903374</h3>
+
+<p>
+
+a.n. Muhammad Habibullah
+
+</p>
+
+<br>
+
+<button class="btn" onclick="copyRek('rek2')">
+    Salin Rekening
+</button>
+<br><br>
+
+<img src="qris.png" style="max-width:250px;width:100%;border-radius:15px;">
+
+</div>
+
+</section>
+
+<footer>
+
+<h2 style="text-align:center;">Terima Kasih</h2>
+
+<p style="text-align:center;">
+    Merupakan suatu kehormatan bagi kami<br>
+    atas kehadiran dan doa restunya.
+</p>
+
+</footer>
+
+</div>
+<script>
+
+function openInvite(){
+
+document.getElementById("content").style.display="block";
+
+document.getElementById("music").play().catch(()=>{});
+
+window.scrollTo({
+
+top:window.innerHeight,
+
+behavior:"smooth"
+
+});
+
+}
+
+const target = new Date("2026-09-27T08:00:00").getTime();
+
+setInterval(()=>{
+
+const now=Date.now();
+
+const diff=target-now;
+
+if(diff<0)return;
+
+document.getElementById("d").innerHTML=Math.floor(diff/86400000);
+
+document.getElementById("h").innerHTML=Math.floor((diff%86400000)/3600000);
+
+document.getElementById("m").innerHTML=Math.floor((diff%3600000)/60000);
+
+document.getElementById("s").innerHTML=Math.floor((diff%60000)/1000);
+
+},1000);
+
+function copyRek(id) {
+
+    const rekening = document.getElementById(id).innerText.trim();
+
+    navigator.clipboard.writeText(rekening);
+
+    const btn = event.target;
+    const old = btn.innerHTML;
+
+    btn.innerHTML = "✓ Berhasil Disalin";
+
+    setTimeout(() => {
+        btn.innerHTML = old;
+    }, 2000);
+
+}
+
+const params=new URLSearchParams(window.location.search);
+
+const tamu=params.get("to");
+
+document.getElementById("namaTamu").innerHTML=
+
+tamu?decodeURIComponent(tamu):"Tamu Undangan";
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".fade").forEach(el=>{
+
+observer.observe(el);
+
+});
+
+const bunga=document.querySelector(".flowers");
+
+for(let i=0;i<30;i++){
+
+const span=document.createElement("span");
+
+const daun=["🍃","🌿","🍀"];
+span.innerHTML=daun[Math.floor(Math.random()*daun.length)];
+
+span.style.left=Math.random()*100+"%";
+
+span.style.animationDuration=
+
+8+Math.random()*10+"s";
+
+span.style.animationDelay=
+
+Math.random()*6+"s";
+
+span.style.fontSize=
+
+18+Math.random()*18+"px";
+
+bunga.appendChild(span);
+
+}
+
+window.addEventListener("scroll",()=>{
+
+const hero=document.querySelector(".hero");
+
+hero.style.backgroundPositionY=
+
+window.pageYOffset*0.5+"px";
+
+});
+
+</script>
+
+</body>
+
+</html>

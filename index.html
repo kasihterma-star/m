@@ -129,6 +129,192 @@ button,a{font:inherit}
   .countdown{grid-template-columns:repeat(2,1fr)}.couple-grid,.event-grid,.gift-grid{grid-template-columns:1fr}
   .gallery{grid-template-columns:1fr 1fr;gap:10px}.person h3{font-size:38px}.story-item h3{font-size:34px}
 }
+
+/* ===== ANIMASI FONT SLOW-MOTION ===== */
+@keyframes slowTextReveal{
+  0%{
+    opacity:0;
+    transform:translateY(28px) scale(.985);
+    filter:blur(5px);
+    letter-spacing:.08em;
+  }
+  55%{
+    opacity:.72;
+    filter:blur(1px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+    letter-spacing:normal;
+  }
+}
+
+@keyframes slowNameReveal{
+  0%{
+    opacity:0;
+    transform:translateY(34px) scale(.94);
+    filter:blur(7px);
+  }
+  60%{
+    opacity:.8;
+    transform:translateY(7px) scale(.99);
+    filter:blur(1px);
+  }
+  100%{
+    opacity:1;
+    transform:none;
+    filter:blur(0);
+  }
+}
+
+/* Cover bergerak perlahan ketika halaman pertama dibuka */
+.cover > *{
+  opacity:0;
+  animation:slowTextReveal 2.2s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.cover > *:nth-child(1){animation-delay:.20s}
+.cover > *:nth-child(2){animation-delay:.65s}
+.cover > *:nth-child(3){animation-delay:1.10s}
+.cover > *:nth-child(4){animation-delay:1.45s}
+.cover > *:nth-child(5){animation-delay:1.85s}
+.cover h1{
+  animation-name:slowNameReveal;
+  animation-duration:2.8s;
+}
+
+/* Isi tiap bagian muncul pelan saat discroll */
+.invite-section.fade .card > *{
+  opacity:0;
+  transform:translateY(24px);
+}
+.invite-section.fade.show .card > *{
+  animation:slowTextReveal 1.9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.invite-section.fade.show .card > *:nth-child(1){animation-delay:.15s}
+.invite-section.fade.show .card > *:nth-child(2){animation-delay:.38s}
+.invite-section.fade.show .card > *:nth-child(3){animation-delay:.61s}
+.invite-section.fade.show .card > *:nth-child(4){animation-delay:.84s}
+.invite-section.fade.show .card > *:nth-child(5){animation-delay:1.07s}
+.invite-section.fade.show .card > *:nth-child(n+6){animation-delay:1.25s}
+
+/* Tetap nyaman bagi pengguna yang mematikan animasi */
+@media (prefers-reduced-motion: reduce){
+  .cover > *,
+  .invite-section.fade .card,
+  .invite-section.fade .card > *{
+    animation:none !important;
+    transition:none !important;
+    opacity:1 !important;
+    transform:none !important;
+    filter:none !important;
+  }
+}
+
+
+/* ===== ANIMASI FONT BOUNCE ===== */
+@keyframes bounceReveal{
+  0%{
+    opacity:0;
+    transform:translateY(55px) scale(.88);
+    filter:blur(4px);
+  }
+  45%{
+    opacity:1;
+    transform:translateY(-14px) scale(1.035);
+    filter:blur(0);
+  }
+  65%{
+    transform:translateY(7px) scale(.985);
+  }
+  82%{
+    transform:translateY(-4px) scale(1.01);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+  }
+}
+
+@keyframes bounceName{
+  0%{
+    opacity:0;
+    transform:translateY(70px) scale(.78);
+    filter:blur(6px);
+  }
+  48%{
+    opacity:1;
+    transform:translateY(-18px) scale(1.06);
+    filter:blur(0);
+  }
+  68%{
+    transform:translateY(9px) scale(.98);
+  }
+  84%{
+    transform:translateY(-5px) scale(1.015);
+  }
+  100%{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.cover > *{
+  opacity:0;
+  animation:bounceReveal 1.5s cubic-bezier(.34,1.56,.64,1) forwards !important;
+}
+.cover > *:nth-child(1){animation-delay:.15s !important}
+.cover > *:nth-child(2){animation-delay:.45s !important}
+.cover > *:nth-child(3){animation-delay:.75s !important}
+.cover > *:nth-child(4){animation-delay:1.00s !important}
+.cover > *:nth-child(5){animation-delay:1.25s !important}
+.cover h1{
+  animation-name:bounceName !important;
+  animation-duration:1.8s !important;
+}
+
+.invite-section.fade .card > *{
+  opacity:0;
+  transform:translateY(40px) scale(.94);
+}
+.invite-section.fade.show .card > *{
+  animation:bounceReveal 1.35s cubic-bezier(.34,1.56,.64,1) forwards !important;
+}
+.invite-section.fade.show .card > *:nth-child(1){animation-delay:.10s !important}
+.invite-section.fade.show .card > *:nth-child(2){animation-delay:.28s !important}
+.invite-section.fade.show .card > *:nth-child(3){animation-delay:.46s !important}
+.invite-section.fade.show .card > *:nth-child(4){animation-delay:.64s !important}
+.invite-section.fade.show .card > *:nth-child(5){animation-delay:.82s !important}
+.invite-section.fade.show .card > *:nth-child(n+6){animation-delay:1s !important}
+
+
+/* ===== BOUNCE SLOW-MOTION ===== */
+.cover > *{
+  animation-duration:2.8s !important;
+}
+.cover h1{
+  animation-duration:3.4s !important;
+}
+
+.invite-section.fade.show .card > *{
+  animation-duration:2.6s !important;
+}
+
+/* Delay antar elemen dibuat lebih renggang agar terasa slow-motion */
+.cover > *:nth-child(1){animation-delay:.20s !important}
+.cover > *:nth-child(2){animation-delay:.75s !important}
+.cover > *:nth-child(3){animation-delay:1.30s !important}
+.cover > *:nth-child(4){animation-delay:1.85s !important}
+.cover > *:nth-child(5){animation-delay:2.40s !important}
+
+.invite-section.fade.show .card > *:nth-child(1){animation-delay:.18s !important}
+.invite-section.fade.show .card > *:nth-child(2){animation-delay:.58s !important}
+.invite-section.fade.show .card > *:nth-child(3){animation-delay:.98s !important}
+.invite-section.fade.show .card > *:nth-child(4){animation-delay:1.38s !important}
+.invite-section.fade.show .card > *:nth-child(5){animation-delay:1.78s !important}
+.invite-section.fade.show .card > *:nth-child(n+6){animation-delay:2.18s !important}
+
 </style>
 </head>
 <body>
@@ -196,10 +382,10 @@ button,a{font:inherit}
       <div class="section-kicker">Our Moments</div>
       <h2 class="title">Galeri</h2>
       <div class="gallery">
-        <img src="foto1.jpg" alt="Galeri May dan Habi 1" loading="lazy">
-        <img src="foto2.jpg" alt="Galeri May dan Habi 2" loading="lazy">
-        <img src="foto3.jpg" alt="Galeri May dan Habi 3" loading="lazy">
-        <img src="foto4.jpg" alt="Galeri May dan Habi 4" loading="lazy">
+        <img src="foto10.jpg" alt="Galeri May dan Habi 1" loading="lazy">
+        <img src="foto11.jpg" alt="Galeri May dan Habi 2" loading="lazy">
+        <img src="foto12.jpg" alt="Galeri May dan Habi 3" loading="lazy">
+        <img src="foto13.jpg" alt="Galeri May dan Habi 4" loading="lazy">
       </div>
     </div>
   </section>

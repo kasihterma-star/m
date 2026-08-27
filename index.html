@@ -501,6 +501,61 @@ for(let i=0;i<22;i++){
   bunga.appendChild(span);
 }
 </script>
+  <script>
+  // ===== TRACKING INTERAKSI UNDANGAN =====
+
+  function trackEvent(name, params = {}) {
+    if (typeof gtag === "function") {
+      gtag("event", name, params);
+    }
+  }
+
+  // Track tombol buka undangan
+  const openBtn = document.querySelector('[onclick*="openInvite"]');
+  if (openBtn) {
+    openBtn.addEventListener("click", () => {
+      trackEvent("open_invitation");
+    });
+  }
+
+  // Track klik Google Maps
+  document.querySelectorAll('a[href*="google.com/maps"], a[href*="maps.app.goo.gl"]').forEach(link => {
+    link.addEventListener("click", () => {
+      trackEvent("click_maps");
+    });
+  });
+
+  // Track tombol salin rekening
+  document.querySelectorAll('button[onclick*="copyRek"]').forEach(btn => {
+    btn.addEventListener("click", () => {
+      trackEvent("copy_rekening");
+    });
+  });
+
+  // Track kedalaman scroll
+  const reached = {
+    25: false,
+    50: false,
+    75: false,
+    90: false
+  };
+
+  window.addEventListener("scroll", () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    if (docHeight <= 0) return;
+
+    const percent = (scrollTop / docHeight) * 100;
+
+    [25, 50, 75, 90].forEach(level => {
+      if (percent >= level && !reached[level]) {
+        reached[level] = true;
+        trackEvent("scroll_" + level);
+      }
+    });
+  });
+</script>
 </body>
 </html>
 

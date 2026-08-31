@@ -324,6 +324,29 @@ button,a{font:inherit}
 .invite-section.fade.show .card > *:nth-child(5){animation-delay:1.78s !important}
 .invite-section.fade.show .card > *:nth-child(n+6){animation-delay:2.18s !important}
 
+
+/* ===== TOMBOL MUSIK MELAYANG ===== */
+.music-toggle{
+  position:fixed;right:18px;bottom:20px;z-index:10000;
+  width:48px;height:48px;border:none;border-radius:50%;
+  background:rgba(53,104,95,.92);color:#fff;display:none;
+  align-items:center;justify-content:center;font-size:22px;cursor:pointer;
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:.3s ease;
+}
+.music-toggle.show{display:flex}
+.music-toggle.playing{animation:musicPulse 2s ease-in-out infinite}
+@keyframes musicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+
+
+/* Tombol tetap diam saat scroll, tetapi bisa dipindah dengan drag */
+.music-toggle{
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
 </style>
 </head>
 <body>
@@ -341,8 +364,11 @@ button,a{font:inherit}
     </div>
     <button class="btn open-btn" onclick="openInvite()">✉ Buka Undangan</button>
     <audio id="music" loop><source src="lagu.mp3" type="audio/mpeg"></audio>
+
   </div>
 </section>
+
+<button id="musicToggle" class="music-toggle" onclick="toggleMusic()" aria-label="Nyalakan atau matikan musik">♫</button>
 
 <main id="content">
   <section class="invite-section bg1 fade">
@@ -455,11 +481,34 @@ button,a{font:inherit}
 <script>
 function openInvite(){
   const content=document.getElementById('content');
+  const music=document.getElementById('music');
+  const musicToggle=document.getElementById('musicToggle');
   content.style.display='block';
-  document.getElementById('music').play().catch(()=>{});
+  music.play().then(()=>{
+    musicToggle.classList.add('show');
+    musicToggle.classList.add('playing');
+    musicToggle.innerHTML='♫';
+  }).catch(()=>{
+    musicToggle.classList.add('show');
+  });
   requestAnimationFrame(()=>{
     document.querySelector('.bg1').scrollIntoView({behavior:'smooth',block:'start'});
   });
+}
+
+function toggleMusic(){
+  const music=document.getElementById('music');
+  const musicToggle=document.getElementById('musicToggle');
+  if(music.paused){
+    music.play().then(()=>{
+      musicToggle.innerHTML='♫';
+      musicToggle.classList.add('playing');
+    }).catch(()=>{});
+  }else{
+    music.pause();
+    musicToggle.innerHTML='🔇';
+    musicToggle.classList.remove('playing');
+  }
 }
 
 const target=new Date('2026-09-27T08:00:00+08:00').getTime();
@@ -556,6 +605,98 @@ for(let i=0;i<22;i++){
     });
   });
 </script>
+
+<script>
+(function(){
+  const btn = document.getElementById('musicToggle');
+  if(!btn) return;
+
+  let dragging = false;
+  let moved = false;
+  let startX = 0;
+  let startY = 0;
+  let startLeft = 0;
+  let startTop = 0;
+
+  btn.addEventListener('pointerdown', function(e){
+    const rect = btn.getBoundingClientRect();
+
+    dragging = true;
+    moved = false;
+
+    startX = e.clientX;
+    startY = e.clientY;
+    startLeft = rect.left;
+    startTop = rect.top;
+
+    /* Tetap fixed terhadap layar, bukan halaman */
+    btn.style.position = 'fixed';
+    btn.style.right = 'auto';
+    btn.style.bottom = 'auto';
+    btn.style.left = rect.left + 'px';
+    btn.style.top = rect.top + 'px';
+
+    btn.setPointerCapture(e.pointerId);
+  });
+
+  btn.addEventListener('pointermove', function(e){
+    if(!dragging) return;
+
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    if(Math.abs(dx) > 5 || Math.abs(dy) > 5){
+      moved = true;
+    }
+
+    let left = startLeft + dx;
+    let top = startTop + dy;
+
+    const maxLeft = window.innerWidth - btn.offsetWidth;
+    const maxTop = window.innerHeight - btn.offsetHeight;
+
+    left = Math.max(8, Math.min(left, maxLeft - 8));
+    top = Math.max(8, Math.min(top, maxTop - 8));
+
+    btn.style.left = left + 'px';
+    btn.style.top = top + 'px';
+  });
+
+  btn.addEventListener('pointerup', function(e){
+    dragging = false;
+    try{ btn.releasePointerCapture(e.pointerId); }catch(err){}
+  });
+
+  btn.addEventListener('pointercancel', function(){
+    dragging = false;
+  });
+
+  /* Kalau baru saja di-drag, jangan dianggap klik ON/OFF */
+  btn.addEventListener('click', function(e){
+    if(moved){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      moved = false;
+    }
+  }, true);
+
+  /* Kalau layar berubah ukuran, tombol tetap di dalam layar */
+  window.addEventListener('resize', function(){
+    const rect = btn.getBoundingClientRect();
+
+    if(btn.style.left){
+      let left = Math.max(8, Math.min(rect.left, window.innerWidth - btn.offsetWidth - 8));
+      let top = Math.max(8, Math.min(rect.top, window.innerHeight - btn.offsetHeight - 8));
+
+      btn.style.left = left + 'px';
+      btn.style.top = top + 'px';
+      btn.style.right = 'auto';
+      btn.style.bottom = 'auto';
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
 
